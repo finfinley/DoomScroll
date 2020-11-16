@@ -27,7 +27,7 @@ app.post('/newdoom', FBAuth, postSomeDoom);
 app.post('/signup', signup);
 // Login route
 app.post('/login', login);
-app.post('/user/image', uploadImage);
+//fapp.post('/user/image', uploadImage);
 
 
 // Good practice for an API to be the following:

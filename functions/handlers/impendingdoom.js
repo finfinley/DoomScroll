@@ -1,5 +1,5 @@
 const { db } = require('../util/admin')
-// How to retrieve all posts 
+// How to retrieve all posts    
 exports.getAllImpendingDoom = (req, res) => {
     db
     .collection('impendingdooms')

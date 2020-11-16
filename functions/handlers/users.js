@@ -7,7 +7,6 @@ const firebase = require('firebase');
 firebase.initializeApp(config);
 
 const { validateSignupData, validateLoginData } = require('../util/validators');
-const admin = require('../util/admin');
 
 // How to sign up 
 exports.signup = (req, res) => {
@@ -91,7 +90,7 @@ exports.login = (req, res) => {
 
 };
 // Uses busboy to help handle uploading photes
-exports.uploadImage(req, res) => {
+/**exports.uploadImage(req, res) => {
     const BusBoy = require('busboy');
     const path = require('path');
     const os = require('os');
@@ -125,5 +124,6 @@ exports.uploadImage(req, res) => {
         .then(() => {
             const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}`
         })
-    })
+    }) 
 }
+*/
