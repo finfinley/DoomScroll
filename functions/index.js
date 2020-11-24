@@ -12,22 +12,55 @@ const app = express();
 // Importing middleware
 const FBAuth = require('./util/fbauth');
 // Importing routes 
-const { getAllImpendingDoom, postSomeDoom } = require('./handlers/impendingdoom');
-const { signup, login, uploadImage } = require('./handlers/users');
+const { getAllImpendingDoom, 
+    postSomeDoom, 
+    getDoom, 
+    commentOnDoom, 
+    encourageDoom, 
+    discourageDoom,
+    deleteDoom 
+} = require('./handlers/impendingdoom');
 
-// Impending Doom routes
+const { signup, 
+    login, 
+    uploadImage, 
+    addUserDetails, 
+    getAutenticatedUser 
+} = require('./handlers/users');
+
+//const fbauth = require('./util/fbauth');
+
+/**
+ * ImpendingDoom Routes *
+ */
 // Get all doom posts 
 app.get('/impendingdooms', getAllImpendingDoom);
 // Post a new doom post 
-// Also allows us to get a user handle. FBAuth is middleware and runs before route goes through
 app.post('/newdoom', FBAuth, postSomeDoom);
+// Route to get doom with comments 
+app.get('/impendingdooms/:doomId', getDoom);
+//TO DO delete impending doom
+app.delete('/impendingdooms/:doomId', FBAuth, deleteDoom);
+// Encourage a doom post 
+app.get('/impendingdooms/:doomId/encourage', FBAuth, encourageDoom);
+// Discourage a doom post (unlike)
+app.get('/impendingdooms/:doomId/discourage', FBAuth, discourageDoom);
+// Comment on a scream
+app.post('/impendingdooms/:doomId/comment', FBAuth, commentOnDoom);
 
-// User routes 
+/**
+ * User Routes * 
+ */ 
 // Signup Route
 app.post('/signup', signup);
 // Login route
 app.post('/login', login);
-//fapp.post('/user/image', uploadImage);
+// Image Upload route 
+app.post('/user/image', FBAuth, uploadImage); // Have to add middleware so only authorized users can login
+// Update User Bio Route 
+app.post('/user/', FBAuth, addUserDetails);
+// Get user info Route
+app.get('/user', FBAuth, getAutenticatedUser); 
 
 
 // Good practice for an API to be the following:
