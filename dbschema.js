@@ -32,8 +32,19 @@ let db = {
             body: 'Way to spread the doom!',
             createdAt: '2020-11-11T23:09:29.179Z'
         }
+    ],
+    doomTick: [
+        {
+            recipient: 'user',
+            sender: 'skullman',
+            read: 'true | false',
+            doomId: 'jashdkasdjasddasad',
+            type: 'encouragement | commment',
+            createdAt: '2020-11-11T23:09:29.179Z'
+        }
     ]
 };
+
 
 const userDetails = {
     // Redux data 
