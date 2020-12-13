@@ -11,6 +11,10 @@ const express = require("express");
 const app = express();
 // Importing middleware
 const FBAuth = require("./util/fbauth");
+
+const cors = require('cors');
+app.use(cors());
+
 // Importing db
 const { db } = require("./util/admin");
 // Importing routes
@@ -71,7 +75,7 @@ app.get("/user", FBAuth, getAutenticatedUser);
 // Get users detail
 app.get("/user/:handle", getUserDetails);
 // Marking doomticks as read
-app.post("/doomticks", FBAuth, markDoomtickRead);
+app.post("/doomticks/", FBAuth, markDoomtickRead);
 
 // Good practice for an API to be the following:
 // https://baseurl.com/api or https://api.baseurl.com
@@ -93,11 +97,14 @@ exports.createDoomtickOnEncouragement = functions.firestore
             createdAt: new Date().toISOString(),
             recipient: doc.data().userHandle,
             sender: snapshot.data().userHandle,
-            type: "enouragement",
+            type: "encouragement",
             read: false,
             doomId: doc.id,
           });
         }
+      })
+      .then(() => {
+        return;
       })
       .catch((err) => {
         console.error(err);
@@ -111,6 +118,9 @@ exports.deleteDoomtickOnDiscouragment = functions.firestore
     return db
       .doc(`/doomtick/${snapshot.id}`)
       .delete()
+      .then(() => {
+        return;
+      })
       .catch((err) => {
         console.error(err);
         return;
@@ -137,6 +147,9 @@ exports.createDoomtickOnComment = functions.firestore
             doomId: doc.id,
           });
         }
+      })
+      .then(() => {
+        return;
       })
       .catch((err) => {
         console.error(err);

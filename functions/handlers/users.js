@@ -71,7 +71,11 @@ exports.signup = (req, res) => {
           .status(400)
           .json({ email: "Try again. We already have that e-mail." });
       } else {
-        return res.status(500).json({ general: 'Things are spiraling out of control. Please try again.'});
+        return res
+          .status(500)
+          .json({
+            general: "Things are spiraling out of control. Please try again.",
+          });
       }
     });
 };
@@ -97,9 +101,10 @@ exports.login = (req, res) => {
       return res.json({ token });
     })
     .catch((err) => {
-        return res
-          .status(403)
-          .json({ general: "Imposter! Wrong credentials. Try again. " });
+      console.error(err);
+      return res
+        .status(403)
+        .json({ general: "Imposter! Wrong credentials. Try again. " });
     });
 };
 
