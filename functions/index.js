@@ -56,7 +56,7 @@ app.delete("/impendingdooms/:doomId", FBAuth, deleteDoom);
 app.get("/impendingdooms/:doomId/encourage", FBAuth, encourageDoom);
 // Discourage a doom post (unlike)
 app.get("/impendingdooms/:doomId/discourage", FBAuth, discourageDoom);
-// Comment on a scream
+// Comment on a doom
 app.post("/impendingdooms/:doomId/comment", FBAuth, commentOnDoom);
 
 /**
